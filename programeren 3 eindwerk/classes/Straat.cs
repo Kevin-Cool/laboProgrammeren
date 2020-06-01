@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
@@ -7,15 +9,21 @@ namespace programeren_3_eindwerk.classes
 {
     public class Straat
     {
-        public Graaf Graaf;
-        public int StraatID;
-        public string Straatnaam;
+        public Graaf Graaf { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int StraatID { get; set; }
+        public string Straatnaam { get; set; }
 
         public Straat(int mStraatID,string mStraatnaam,Graaf mGraaf)
         {
             StraatID = mStraatID;
             Straatnaam = mStraatnaam;
             Graaf = mGraaf;
+        }
+        public Straat()
+        {
+
         }
         public List<Knoop> getKnopen()
         {

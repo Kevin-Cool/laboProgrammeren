@@ -1,18 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace programeren_3_eindwerk.classes
 {
     public class Knoop
     {
-        public int KnoopID;
-        public Punt Punt;
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int KnoopID { get; set; }
+        public Punt Punt { get; set; }
 
         public Knoop(int id,Punt mpunt)
         {
             KnoopID = id;
             Punt = mpunt;
+        }
+        public Knoop()
+        {
+
         }
         public bool Equals(Knoop other)
         {

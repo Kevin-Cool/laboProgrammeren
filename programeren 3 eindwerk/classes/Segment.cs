@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
@@ -7,10 +9,12 @@ namespace programeren_3_eindwerk.classes
 {
     public class Segment
     {
-        public Knoop Beginknoop;
-        public Knoop Eindknoop;
-        public int SegmentID;
-        public List<Punt> Vertices;
+        public Knoop Beginknoop { get; set; }
+        public Knoop Eindknoop { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int SegmentID { get; set; }
+        public List<Punt> Vertices { get; set; }
 
         public Segment(int mSegmentID,Knoop mBeginknoop,Knoop mEindknoop,List<Punt> mVertices)
         {
@@ -18,6 +22,10 @@ namespace programeren_3_eindwerk.classes
             Beginknoop = mBeginknoop;
             Eindknoop = mEindknoop;
             Vertices = mVertices;
+        }
+        public Segment()
+        {
+
         }
         public bool Equals(Segment other)
         {

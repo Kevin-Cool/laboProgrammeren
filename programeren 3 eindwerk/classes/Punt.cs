@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace programeren_3_eindwerk.classes
 {
     public class Punt
     {
-        public double X;
-        public double Y;
+        [Key]
+        public int ID { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
 
         public Punt(double mx, double my)
         {
             X = mx;
             Y = my;
+        }
+        public Punt()
+        {
+
         }
         public bool Equals(Punt other)
         {
