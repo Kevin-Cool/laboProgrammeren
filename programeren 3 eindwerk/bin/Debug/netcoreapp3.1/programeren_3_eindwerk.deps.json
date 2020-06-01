@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "programeren_3_eindwerk/1.0.0": {
+        "runtime": {
+          "programeren_3_eindwerk.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "programeren_3_eindwerk/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

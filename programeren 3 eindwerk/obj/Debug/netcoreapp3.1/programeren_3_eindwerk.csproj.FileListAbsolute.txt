@@ -1,0 +1,13 @@
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\obj\Debug\netcoreapp3.1\programeren_3_eindwerk.csproj.CoreCompileInputs.cache
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\obj\Debug\netcoreapp3.1\programeren_3_eindwerk.AssemblyInfoInputs.cache
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\obj\Debug\netcoreapp3.1\programeren_3_eindwerk.AssemblyInfo.cs
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\bin\Debug\netcoreapp3.1\programeren_3_eindwerk.exe
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\bin\Debug\netcoreapp3.1\programeren_3_eindwerk.deps.json
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\bin\Debug\netcoreapp3.1\programeren_3_eindwerk.runtimeconfig.json
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\bin\Debug\netcoreapp3.1\programeren_3_eindwerk.runtimeconfig.dev.json
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\bin\Debug\netcoreapp3.1\programeren_3_eindwerk.dll
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\bin\Debug\netcoreapp3.1\programeren_3_eindwerk.pdb
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\obj\Debug\netcoreapp3.1\programeren_3_eindwerk.dll
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\obj\Debug\netcoreapp3.1\programeren_3_eindwerk.pdb
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\obj\Debug\netcoreapp3.1\programeren_3_eindwerk.genruntimeconfig.cache
+C:\Users\kevin\source\repos\programeren 3 eindwerk\programeren 3 eindwerk\obj\Debug\netcoreapp3.1\programeren_3_eindwerk.csprojAssemblyReference.cache

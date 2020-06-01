@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "programeren 3 eindwerk/1.0.0": {
+        "runtime": {
+          "programeren 3 eindwerk.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "programeren 3 eindwerk/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
