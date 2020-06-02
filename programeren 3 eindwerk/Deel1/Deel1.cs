@@ -23,60 +23,70 @@ namespace programeren_3_eindwerk.Deel1
             int KnoopCount = 0;
             int GraafCount = 0;
 
-            List<Provincie> Finalprovincies = new List<Provincie>();
             List<int> Nutigeprovincies = new List<int>();
             List<Provincie> provincies = new List<Provincie>();
             List<Gemeente> gemeenten = new List<Gemeente>();
             List<Straat> straten = new List<Straat>();
 
-            Dictionary<int, string> straatnamen = new Dictionary<int, string>();
-
             Dictionary<int, int> straatNaarGemeente = new Dictionary<int, int>();
+            Dictionary<int, List<int>> ProvinciesNaarGemeente = new Dictionary<int, List<int>>();
             Dictionary<int, List<Segment>> segmentenDic = new Dictionary<int, List<Segment>>();
+
             // nutige provincies lezen 
+            Console.Out.WriteLine("nutige provincies lezen ");
             List<string> ProvincieIDsVlaanderen = ReadFile(pathProvincieIDsVlaanderen,false);
             foreach (string s in ProvincieIDsVlaanderen)
             {
                 string[] temps = s.Split(',');
-                if (provincies.Any(x => x.ProvincieID != int.Parse(temps[1])))
+               
+                foreach (string  id in temps)
                 {
-                    foreach (string  id in temps)
-                    {
-                        Nutigeprovincies.Add(int.Parse(id));
-                    }
+                    Nutigeprovincies.Add(int.Parse(id));
                 }
+                
              }
             // provincies lezen
+            Console.Out.WriteLine("provincies lezen");
             List<string> ProvincieInfo = ReadFile(pathProvincieInfo);
             foreach (string s in ProvincieInfo)
             {
                 string[] temps = s.Split(';');
-                if ((provincies.Any(x => x.ProvincieID != int.Parse(temps[1]))) && (Nutigeprovincies.Any(x => x == int.Parse(temps[1]))))
+                if (Nutigeprovincies.Any(x => x == int.Parse(temps[1])))
                 {
                     if ((temps[2] == "nl") && Regex.IsMatch(temps[1], @"^\d+$") && (int.Parse(temps[1]) >= 0))
                     {
-                        provincies.Add(new Provincie(int.Parse(temps[1]), temps[3]));
-                        Console.WriteLine("Creating Provincie:" + temps[1]);
+                        if(!provincies.Any(x => x.ProvincieID == int.Parse(temps[1])))
+                        {
+                            provincies.Add(new Provincie(int.Parse(temps[1]), temps[3]));
+                        }
+                        //Console.WriteLine("Creating Provincie:" + temps[1]);
+                        if(!ProvinciesNaarGemeente.Any(x => x.Key == int.Parse(temps[1])))
+                        {
+                            ProvinciesNaarGemeente.Add(int.Parse(temps[1]), new List<int>());
+                        }
+                        ProvinciesNaarGemeente[int.Parse(temps[1])].Add(int.Parse(temps[0]));
                     }
 
                 }
 
             }
-            // gemeentes lezen 
+            // gemeentes lezen
+            Console.Out.WriteLine("gemeentes lezen");
             List<string> WRgemeentenaam = ReadFile(pathWRgemeentenaam);
             foreach (string s in WRgemeentenaam)
             {
                 string[] temps = s.Split(';');
                 if(temps[2] == "nl")
                 {
-                    if (provincies.Any(x => x.ProvincieID == int.Parse(temps[1])))
+                    if (ProvinciesNaarGemeente.Any(x => x.Value.Any(y => y.Equals(int.Parse(temps[1])))))
                     {
                         gemeenten.Add(new Gemeente(int.Parse(temps[1]), temps[3]));
-                        Console.WriteLine("Creating Gemeente:" + temps[1]);
+                        //Console.WriteLine("Creating Gemeente:" + temps[1]);
                     }
                 }
             }
             // straaten ids naar gemeente ids lezen 
+            Console.Out.WriteLine("traaten ids naar gemeente ids lezen ");
             List<string> WRGemeenteID = ReadFile(pathWRGemeenteID);
             foreach (string s in WRGemeenteID)
             {
@@ -86,12 +96,13 @@ namespace programeren_3_eindwerk.Deel1
                     if (gemeenten.Any(x => x.GemeenteID == int.Parse(temps[1])))
                     {
                         straatNaarGemeente.Add(int.Parse(temps[0]), int.Parse(temps[1]));
-                        Console.WriteLine("Creating straatNaarGemeente:" + temps[0]);
+                        //Console.WriteLine("Creating straatNaarGemeente:" + temps[0]);
                     }
                 }
             }
             // straaten lezen
-            List<string> WRstraatnamen = ReadFile(pathWRGemeenteID);
+            Console.Out.WriteLine("straaten lezen");
+            List<string> WRstraatnamen = ReadFile(pathstraatnamen);
             foreach (string s in WRstraatnamen)
             {
                 string[] temps = s.Split(';');
@@ -102,11 +113,13 @@ namespace programeren_3_eindwerk.Deel1
                         //straatnamen.Add(int.Parse(temps[0]), temps[1]);
                         straten.Add(new Straat(int.Parse(temps[0]), temps[1], new Graaf(GraafCount)));
                         GraafCount++;
-                        Console.WriteLine("Creating straatnamen:" + temps[0]);
+                        //Console.WriteLine("Creating straatnamen:" + temps[0]);
                     }
                 }
             }
             // maken en lijst van segmenten maken en aan straaten toe voegen
+            /*
+            Console.Out.WriteLine("maken en lijst van segmenten maken en aan straaten toe voegen");
             List<string> WRdata = ReadFile(pathWRdata);
             string[] tempString;
             foreach (string s in WRdata)
@@ -116,16 +129,15 @@ namespace programeren_3_eindwerk.Deel1
                 string geo = tempString[1]; //lijst van punten 
                 geo = geo.Remove(0, 12);
                 geo = geo.Remove(geo.Length - 2);
-                string morfologie = tempString[2];
-                string status = tempString[3];
+                //string morfologie = tempString[2];
+                //string status = tempString[3];
                 string beginWegknoopID = tempString[4];
                 string eindWegknoopID = tempString[5];
                 int linksStraatnaamID = int.Parse(tempString[6]); //-9
                 int rechtsStraatnaamID = int.Parse(tempString[7]); //-9
-
-                if ((linksStraatnaamID != -9) && (rechtsStraatnaamID != -9) && ((straten.Any(x => x.StraatID == linksStraatnaamID)) || (straten.Any(x => x.StraatID == rechtsStraatnaamID))))
+                if ((linksStraatnaamID != -9) && (rechtsStraatnaamID != -9))
                 {
-                        List<Punt> punten = new List<Punt>();
+                    List<Punt> punten = new List<Punt>();
                     foreach (string punt in geo.Split(", "))
                     {
                         string[] puntSplit = punt.Split(" ");
@@ -137,32 +149,40 @@ namespace programeren_3_eindwerk.Deel1
                     KnoopCount++;
                     Segment segment = new Segment(SegmentCount, eersteKnoop, tweedeKnoop, punten);
                     SegmentCount++;
-                    if (linksStraatnaamID != -9)
+                    if( (linksStraatnaamID != -9) && ((straten.Any(x => x.StraatID == linksStraatnaamID))))
                     {
                         straten.First(x => x.StraatID == linksStraatnaamID).Graaf.parsList(segment);                      
                     }
-                    if (rechtsStraatnaamID != -9)
+                    if( (rechtsStraatnaamID != -9) && (straten.Any(x => x.StraatID == rechtsStraatnaamID)))
                     {
                         straten.First(x => x.StraatID == rechtsStraatnaamID).Graaf.parsList(segment);
                     }
-                    Console.WriteLine("Creating segment:" + wegsegmentID);
+                    
                 }
             }
+            */
             // straten toe voegen aan gemeentes
+            Console.Out.WriteLine("straten toe voegen aan gemeentes");
             foreach (int straatID in straatNaarGemeente.Keys)
             {
-                gemeenten.First(x => x.GemeenteID == straatNaarGemeente[straatID]).Straten.Add(straten.First(x => x.StraatID == straatID));
+                if(straten.Any(x => x.StraatID == straatID))
+                {
+                    gemeenten.First(x => x.GemeenteID == straatNaarGemeente[straatID]).Straten.Add(straten.First(x => x.StraatID == straatID));
+                }
             }
+
+            
             // gemeentes toe voegen aan provincies
-            foreach (int straatID in gemeenten)
+            Console.Out.WriteLine(" gemeentes toe voegen aan provincies");
+            foreach (int provincieID in ProvinciesNaarGemeente.Keys)
             {
-                gemeenten.First(x => x.GemeenteID == straatNaarGemeente[straatID]).Straten.Add(straten.First(x => x.StraatID == straatID));
+                foreach (int gemeenteID in ProvinciesNaarGemeente[provincieID])
+                {
+                    provincies.First(x => x.ProvincieID == provincieID).Gemeenten.Add(gemeenten.First(x => x.GemeenteID == gemeenteID));
+                }
             }
 
-
-
-            Finalprovincies = provincies;
-            return Finalprovincies;
+            return provincies;
         }
 
         static List<string> ReadFile(string path,bool? header = true)

@@ -2,6 +2,7 @@
 using programeren_3_eindwerk.classes;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace programeren_3_eindwerk.Deel2
@@ -14,6 +15,9 @@ namespace programeren_3_eindwerk.Deel2
         public DomainController()
         {
 
+            Public List<int> GeefLijstStraatIDsVanGemeente(int gemeenteID){
+
+            }
         }
 
 
