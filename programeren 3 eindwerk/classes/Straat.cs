@@ -23,7 +23,7 @@ namespace programeren_3_eindwerk.classes
         }
         public Straat()
         {
-
+            Graaf = new Graaf();
         }
         public List<Knoop> getKnopen()
         {
@@ -32,6 +32,10 @@ namespace programeren_3_eindwerk.classes
         public void showSraat()
         {
             Console.Out.WriteLine("its me Straat");
+        }
+        public override string ToString()
+        {
+            return $"StraatNaam: {Straatnaam} \n StraatID: {StraatID}" + Graaf?.ToString();
         }
     }
 }

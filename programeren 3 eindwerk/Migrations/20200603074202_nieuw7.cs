@@ -2,7 +2,7 @@
 
 namespace programeren_3_eindwerk.Migrations
 {
-    public partial class ja : Migration
+    public partial class nieuw7 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,6 +11,7 @@ namespace programeren_3_eindwerk.Migrations
                 columns: table => new
                 {
                     GraafID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -95,7 +96,7 @@ namespace programeren_3_eindwerk.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Punten",
+                name: "Puntes",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -106,9 +107,9 @@ namespace programeren_3_eindwerk.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Punten", x => x.ID);
+                    table.PrimaryKey("PK_Puntes", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Punten_Segmenten_SegmentID",
+                        name: "FK_Puntes_Segmenten_SegmentID",
                         column: x => x.SegmentID,
                         principalTable: "Segmenten",
                         principalColumn: "SegmentID",
@@ -119,16 +120,17 @@ namespace programeren_3_eindwerk.Migrations
                 name: "Knopen",
                 columns: table => new
                 {
-                    KnoopID = table.Column<int>(nullable: false),
+                    KnoopID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PuntID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Knopen", x => x.KnoopID);
                     table.ForeignKey(
-                        name: "FK_Knopen_Punten_PuntID",
+                        name: "FK_Knopen_Puntes_PuntID",
                         column: x => x.PuntID,
-                        principalTable: "Punten",
+                        principalTable: "Puntes",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -144,8 +146,8 @@ namespace programeren_3_eindwerk.Migrations
                 column: "PuntID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Punten_SegmentID",
-                table: "Punten",
+                name: "IX_Puntes_SegmentID",
+                table: "Puntes",
                 column: "SegmentID");
 
             migrationBuilder.CreateIndex(
@@ -193,7 +195,7 @@ namespace programeren_3_eindwerk.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Knopen_Punten_PuntID",
+                name: "FK_Knopen_Puntes_PuntID",
                 table: "Knopen");
 
             migrationBuilder.DropTable(
@@ -206,7 +208,7 @@ namespace programeren_3_eindwerk.Migrations
                 name: "Provincies");
 
             migrationBuilder.DropTable(
-                name: "Punten");
+                name: "Puntes");
 
             migrationBuilder.DropTable(
                 name: "Segmenten");

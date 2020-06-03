@@ -10,7 +10,6 @@ namespace programeren_3_eindwerk.classes
     public class Graaf
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int GraafID { get; set; }
         [NotMapped]
         public Dictionary<Knoop, List<Segment>> Map { get; set; } = new Dictionary<Knoop, List<Segment>>();
@@ -58,6 +57,21 @@ namespace programeren_3_eindwerk.classes
         public static Graaf BuildGraaf(int mGraafID, List<Segment> mMap)
         {
             return new Graaf(mGraafID, mMap);
+        }
+        public override string ToString()
+        {
+            string builderString = $"GraafId: {GraafID}\n";
+            foreach (Knoop knoop in Map.Keys)
+            {
+                
+                builderString += knoop.ToString();
+                foreach (Segment segmenten in Map[knoop])
+                {
+                    builderString += segmenten.ToString();
+                }
+                builderString += "\n";
+            }
+            return builderString;
         }
     }
 }

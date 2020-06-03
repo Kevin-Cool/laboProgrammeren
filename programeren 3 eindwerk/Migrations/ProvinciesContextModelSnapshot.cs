@@ -40,7 +40,9 @@ namespace programeren_3_eindwerk.Migrations
             modelBuilder.Entity("programeren_3_eindwerk.classes.Graaf", b =>
                 {
                     b.Property<int>("GraafID")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("GraafID");
 
@@ -50,7 +52,9 @@ namespace programeren_3_eindwerk.Migrations
             modelBuilder.Entity("programeren_3_eindwerk.classes.Knoop", b =>
                 {
                     b.Property<int>("KnoopID")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("PuntID")
                         .HasColumnType("int");
@@ -95,7 +99,7 @@ namespace programeren_3_eindwerk.Migrations
 
                     b.HasIndex("SegmentID");
 
-                    b.ToTable("Punten");
+                    b.ToTable("Puntes");
                 });
 
             modelBuilder.Entity("programeren_3_eindwerk.classes.Segment", b =>

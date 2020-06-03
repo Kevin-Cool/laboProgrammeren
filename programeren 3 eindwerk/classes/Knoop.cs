@@ -9,7 +9,6 @@ namespace programeren_3_eindwerk.classes
     public class Knoop
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int KnoopID { get; set; }
         public Punt Punt { get; set; }
 

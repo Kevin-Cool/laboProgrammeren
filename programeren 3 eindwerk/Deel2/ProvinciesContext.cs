@@ -28,7 +28,7 @@ namespace programeren_3_eindwerk.Deel2
             modelBuilder.Entity<Graaf>().ToTable("Grafen");
             modelBuilder.Entity<Segment>().ToTable("Segmenten");
             modelBuilder.Entity<Knoop>().ToTable("Knopen");
-            modelBuilder.Entity<Punt>().ToTable("Punten");
+            modelBuilder.Entity<Punt>().ToTable("Puntes");
 
 
 
